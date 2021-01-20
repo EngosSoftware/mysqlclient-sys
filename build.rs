@@ -1,4 +1,8 @@
+use std::env;
+
 fn main() {
-    println!("cargo:rustc-link-search=native=native");
-    println!("cargo:rustc-link-lib=static=libmysqlclient");
+    if let Ok(path) = env::var("MYSQLCLIENT_LIB_DIR") {
+        println!("cargo:rustc-link-search=native={}", path);
+    }
+    println!("cargo:rustc-link-lib=static=mysqlclient");
 }
