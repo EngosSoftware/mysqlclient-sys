@@ -1,5 +1,7 @@
+extern crate pkg_config;
+
 fn main() {
-    println!("-L/usr/lib/x86_64-linux-gnu -lmysqlclient -lssl -lcrypto -lcrypt");
+    pkg_config::Config::new().statik(true).probe("mysqlclient").unwrap();
     println!("cargo:rustc-link-lib=static=mysqlclient");
     println!("cargo:rustc-link-lib=static=ssl");
     println!("cargo:rustc-link-lib=static=crypto");
